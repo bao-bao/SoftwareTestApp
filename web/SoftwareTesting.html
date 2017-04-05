@@ -7,7 +7,7 @@
           content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <link rel="stylesheet" href="css/app.v2.css" type="text/css"/>
-    <link rel="stylesheet" href="css/font.css" type="text/css" cache="false"/>
+    <<link href="http://libs.baidu.com/fontawesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>
 <section class="vbox">
@@ -44,18 +44,28 @@
                              data-size="5px" data-color="#333333">
                             <nav class="nav-primary hidden-xs">
                                 <form class="nav" method="post">
-                                    <i class="fa fa-dashboard icon" style="margin-top: 20px; margin-left: 5% "> <b
-                                            class="bg-danger"></b> </i>
+                                    <i class="fa fa-dashboard icon" style="margin-top: 20px; margin-left: 5% ">
+                                        <b class="bg-danger"></b>
+                                    </i>
                                     <input class="form-control" type="text"
                                            style="width: 90%; margin-left: 5%; margin-right: 5%"
-                                           placeholder="Disabled input here..." disabled>
-                                    <i class="fa fa-columns icon" style="margin-top: 20px; margin-left: 5%"> <b
-                                            class="bg-warning"></b> </i>
+                                           placeholder="Project name" disabled>
+
+                                    <i class="fa fa-file-text icon" style="margin-top: 20px; margin-left: 5% ">
+                                        <b class="bg-primary"></b>
+                                    </i>
+                                    <a href="javascript:;" class="a-upload" style="width: 90%; margin-left: 5%; margin-right: 5%" >
+                                        <input type="file" name="" id=""> <div style="font-size: 14px ">Select file </div>
+                                    </a>
+                                    <i class="fa fa-columns icon" style="margin-top: 20px; margin-left: 5%">
+                                        <b class="bg-warning"></b>
+                                    </i>
                                     <input type="text" class="form-control"
                                            style="width: 90%; margin-left: 5%; margin-right: 5%" placeholder="Tester"
                                            data-required="true">
-                                    <i class="fa fa-flask icon" style="margin-top: 20px; margin-left: 5%"> <b
-                                            class="bg-success"></b> </i>
+                                    <i class="fa fa-flask icon" style="margin-top: 20px; margin-left: 5%">
+                                        <b class="bg-success"></b>
+                                    </i>
                                     <input type="text" class="form-control"
                                            style="width: 90%; margin-left: 5%; margin-right: 5%" placeholder="Date"
                                            data-required="true">
@@ -117,12 +127,14 @@
                                 </form>
                             </div>
                         </div>
+
+
                     </section>
                 </section>
             </section>
         </section>
     </section>
 </section>
-</body>
 <script src="js/app.v2.js"></script>
+</body>
 </html>
