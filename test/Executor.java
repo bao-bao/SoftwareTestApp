@@ -64,7 +64,7 @@ class Executor {
         return testResult;
     }
 
-    AnalysisResult write(ArrayList<Object> result, int resultColumn) {
+    AnalysisResult write(ArrayList<Object> result, int resultColumn, String tester) {
         WritableWorkbook workbook;
         Workbook data;
         AnalysisResult analysisResult = null;
@@ -148,10 +148,13 @@ class Executor {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Label label = new Label(resultColumn + 4, 1, sdf.format(new Date()));
             wSheet.addCell(label);
-            //10.写入工作表
+            //10.写入测试人
+            Label ter = new Label(resultColumn + 5, 1, tester);
+            wSheet.addCell(ter);
+            //11.写入工作表
             workbook.write();
             workbook.close();
-            //11.写入分析结果
+            //12.写入分析结果
             analysisResult = new AnalysisResult(result.size(), (int)rightNum, result.size() - (int)rightNum, (rightNum / result.size()) * 100);
         } catch (Exception e) {
             e.printStackTrace();

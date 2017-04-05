@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html lang="en" class="app">
 <head>
     <meta charset="utf-8"/>
@@ -7,7 +8,9 @@
           content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <link rel="stylesheet" href="css/app.v2.css" type="text/css"/>
-    <<link href="http://libs.baidu.com/fontawesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="http://libs.baidu.com/fontawesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <script src="//cdn.bootcss.com/jquery/3.2.1/core.js"></script>
+    <script src="js/app.v2.js"></script>
 </head>
 <body>
 <section class="vbox">
@@ -31,10 +34,10 @@
                             <div class="btn-group hidden-nav-xs">
                                 <button type="button" class="btn btn-sm btn-primary dropdown-toggle"
                                         data-toggle="dropdown"> Switch Project <span class="caret"></span></button>
-                                <ul class="dropdown-menu text-left">
-                                    <li><a href="#">Triangle</a></li>
-                                    <li><a href="#">Date</a></li>
-                                    <li><a href="#">Sale</a></li>
+                                <ul id="select" class="dropdown-menu text-left">
+                                    <li><a href="javascript:" onclick="document.getElementById('project').val = 'Triangle';">Triangle</a></li>
+                                    <li><a href="javascript:" onclick="document.getElementById('project').val = 'Date';">Date</a></li>
+                                    <li><a href="javascript:" onclick="document.getElementById('project').val = 'Sale';">Sale</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -43,32 +46,27 @@
                         <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0"
                              data-size="5px" data-color="#333333">
                             <nav class="nav-primary hidden-xs">
-                                <form class="nav" method="post">
+                                <form class="nav" method="post" action="Test">
                                     <i class="fa fa-dashboard icon" style="margin-top: 20px; margin-left: 5% ">
                                         <b class="bg-danger"></b>
                                     </i>
-                                    <input class="form-control" type="text"
+                                    <input class="form-control" type="text" id="project"
                                            style="width: 90%; margin-left: 5%; margin-right: 5%"
                                            placeholder="Project name" disabled>
 
                                     <i class="fa fa-file-text icon" style="margin-top: 20px; margin-left: 5% ">
                                         <b class="bg-primary"></b>
                                     </i>
-                                    <a href="javascript:;" class="a-upload" style="width: 90%; margin-left: 5%; margin-right: 5%" >
-                                        <input type="file" name="" id=""> <div style="font-size: 14px ">Select file </div>
+                                    <a href="javascript:" class="a-upload" style="width: 90%; margin-left: 5%; margin-right: 5%" >
+                                        <input type="file" name="" id="file"> <div style="font-size: 14px ">Select file </div>
                                     </a>
                                     <i class="fa fa-columns icon" style="margin-top: 20px; margin-left: 5%">
                                         <b class="bg-warning"></b>
                                     </i>
-                                    <input type="text" class="form-control"
+                                    <input type="text" class="form-control" id="tester"
                                            style="width: 90%; margin-left: 5%; margin-right: 5%" placeholder="Tester"
                                            data-required="true">
-                                    <i class="fa fa-flask icon" style="margin-top: 20px; margin-left: 5%">
-                                        <b class="bg-success"></b>
-                                    </i>
-                                    <input type="text" class="form-control"
-                                           style="width: 90%; margin-left: 5%; margin-right: 5%" placeholder="Date"
-                                           data-required="true">
+
                                     <button type="submit" class="btn btn-success btn-s-xs"
                                             style="margin-top: 20px; margin-left: 29%">Submit
                                     </button>
@@ -135,6 +133,5 @@
         </section>
     </section>
 </section>
-<script src="js/app.v2.js"></script>
 </body>
 </html>

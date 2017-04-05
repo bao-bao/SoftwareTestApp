@@ -15,13 +15,14 @@ public class TestServlet extends HttpServlet {
         FileUploader fileUploader = new FileUploader(request);
         AnalysisResult analysisResult = null;
         String testedName = request.getParameter("project");
+        String tester = request.getParameter("tester");
         switch (testedName) {
             case "Triangle":
-                TestTriangle testTriangle = new TestTriangle(fileUploader.getFileName(), "Test" + fileUploader.getFileName());
+                TestTriangle testTriangle = new TestTriangle(fileUploader.getFileName(), "Test" + fileUploader.getFileName(), tester);
                 analysisResult = testTriangle.doTest();
                 break;
             case "Date":
-                TestDate testDate = new TestDate(fileUploader.getFileName(), "Test" + fileUploader.getFileName());
+                TestDate testDate = new TestDate(fileUploader.getFileName(), "Test" + fileUploader.getFileName(), tester);
                 analysisResult = testDate.doTest();
                 break;
             case "Salary":

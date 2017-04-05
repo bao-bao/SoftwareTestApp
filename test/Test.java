@@ -3,10 +3,12 @@
 abstract class Test {
     String testDataFile;
     String testResultFile;
+    String tester;
 
-    Test(String testDataFile, String testResultFile) {
+    Test(String testDataFile, String testResultFile, String tester) {
         this.testDataFile = testDataFile;
         this.testResultFile = testResultFile;
+        this.tester = tester;
     }
 
     abstract AnalysisResult doTest();

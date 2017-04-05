@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class TestDate extends Test {
 
-    public TestDate(String testDataFile, String testResultFile) {
-        super(testDataFile, testResultFile);
+    public TestDate(String testDataFile, String testResultFile, String tester) {
+        super(testDataFile, testResultFile, tester);
     }
 
     public AnalysisResult doTest() {
@@ -13,7 +13,7 @@ public class TestDate extends Test {
         AnalysisResult analysisResult = null;
         try {
             ArrayList<Object> result = executor.execute(this, TestDate.class.getMethod("invoke", Object.class), 1);
-            analysisResult = executor.write(result, 2);
+            analysisResult = executor.write(result, 2, tester);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
