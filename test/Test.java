@@ -1,6 +1,14 @@
 /* Created by AMXPC on 2017/3/16. */
 
-interface Test {
-    void doTest();
-    Object invoke(Object args) throws Exception;
+abstract class Test {
+    String testDataFile;
+    String testResultFile;
+
+    Test(String testDataFile, String testResultFile) {
+        this.testDataFile = testDataFile;
+        this.testResultFile = testResultFile;
+    }
+
+    abstract AnalysisResult doTest();
+    abstract protected Object invoke(Object args) throws Exception;
 }

@@ -2,16 +2,22 @@
 
 import java.util.ArrayList;
 
-public class TestTriangle implements Test {
-    public void doTest() {
-        Executor executor = new Executor("testResource\\Triangle.xls", "testResource\\TriangleTest.xls", "Triangle");
-        TestTriangle testTriangle = new TestTriangle();
+public class TestTriangle extends Test {
+
+    public TestTriangle(String testDataFile, String testResultFile) {
+        super(testDataFile, testResultFile);
+    }
+
+    public AnalysisResult doTest() {
+        Executor executor = new Executor(testDataFile, testResultFile, "Triangle");
+        AnalysisResult analysisResult = null;
         try {
-            ArrayList<Object> result = executor.execute(testTriangle, TestTriangle.class.getMethod("invoke", Object.class), 3, 29);
-            executor.write(result, 4);
+            ArrayList<Object> result = executor.execute(this, TestTriangle.class.getMethod("invoke", Object.class), 3);
+            analysisResult = executor.write(result, 4);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
+        return analysisResult;
     }
 
     public String invoke(Object args) throws NumberFormatException {

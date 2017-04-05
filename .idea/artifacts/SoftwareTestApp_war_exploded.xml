@@ -7,6 +7,11 @@
         <element id="directory" name="classes">
           <element id="module-output" name="SoftwareTestApp" />
         </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="C:/Java/xlsReader/jxl.jar" />
+          <element id="library" level="application" name="commons-fileupload-1.3.2" />
+          <element id="library" level="application" name="jxl-2.6" />
+        </element>
       </element>
     </root>
   </artifact>

@@ -2,16 +2,22 @@
 
 import java.util.ArrayList;
 
-public class TestDate implements Test {
-    public void doTest() {
-        Executor executor = new Executor("testResource\\Date.xls", "testResource\\DateTest.xls", "Date");
-        TestDate testDate = new TestDate();
+public class TestDate extends Test {
+
+    public TestDate(String testDataFile, String testResultFile) {
+        super(testDataFile, testResultFile);
+    }
+
+    public AnalysisResult doTest() {
+        Executor executor = new Executor(testDataFile, testResultFile, "Date");
+        AnalysisResult analysisResult = null;
         try {
-            ArrayList<Object> result = executor.execute(testDate, TestDate.class.getMethod("invoke", Object.class), 1, 42);
-            executor.write(result, 2);
+            ArrayList<Object> result = executor.execute(this, TestDate.class.getMethod("invoke", Object.class), 1);
+            analysisResult = executor.write(result, 2);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
+        return analysisResult;
     }
 
     public String invoke(Object args) throws Exception {

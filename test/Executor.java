@@ -27,7 +27,7 @@ class Executor {
         this.sheet = sheet;
     }
 
-    ArrayList<Object> execute(Object object, Method method, int argNum, int testNum) {
+    ArrayList<Object> execute(Object object, Method method, int argNum) {
         Workbook workbook = null;
         ArrayList<Object> testResult = new ArrayList<>();
         try {
@@ -39,7 +39,7 @@ class Executor {
             //获取第一张Sheet表
             Sheet readsheet = workbook.getSheet(sheet);
             //获取指定单元格的对象引用
-            for (int row = 1; row <= testNum; row++) {
+            for (int row = 1; row <= readsheet.getRows(); row++) {
                 String[] args = new String[argNum];
                 for (int column = 1; column <= argNum; column++) {
                     Cell cell = readsheet.getCell(column, row);
@@ -64,9 +64,10 @@ class Executor {
         return testResult;
     }
 
-    void write(ArrayList<Object> result, int resultColumn) {
+    AnalysisResult write(ArrayList<Object> result, int resultColumn) {
         WritableWorkbook workbook;
         Workbook data;
+        AnalysisResult analysisResult = null;
         try {
             /* 方法一：直接从目标文件中读取 WritableWorkbook wwb = Workbook.createWorkbook(new File(targetfile));
              * 方法二：将WritableWorkbook直接写入到输出流 WritableWorkbook wwb = Workbook.createWorkbook(outputStream);   */
@@ -150,8 +151,11 @@ class Executor {
             //10.写入工作表
             workbook.write();
             workbook.close();
+            //11.写入分析结果
+            analysisResult = new AnalysisResult(result.size(), (int)rightNum, result.size() - (int)rightNum, (rightNum / result.size()) * 100);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return analysisResult;
     }
 }
