@@ -20,4 +20,20 @@ public class AnalysisResult {
     public void setAttribute(HttpServletRequest request) {
         request.setAttribute("analysisResult", this);
     }
+
+    public Integer getTotalUsecase() {
+        return totalUsecase;
+    }
+
+    public Integer getRightNum() {
+        return rightNum;
+    }
+
+    public Integer getWrongNum() {
+        return wrongNum;
+    }
+
+    public Double getPercentage() {
+        return percentage;
+    }
 }

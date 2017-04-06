@@ -4,12 +4,12 @@ import java.io.File;
 
 abstract class Test {
     File testDataFile;
-    String testResultFile;
+    String testResultFilePath;
     String tester;
 
-    Test(File testDataFile, String testResultFile, String tester) {
+    Test(File testDataFile, String testResultFilePath, String tester) {
         this.testDataFile = testDataFile;
-        this.testResultFile = testResultFile;
+        this.testResultFilePath = testResultFilePath;
         this.tester = tester;
     }
 

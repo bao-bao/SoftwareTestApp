@@ -1,4 +1,4 @@
-/* Created by AMXPC on 2017/3/31. */
+package servlet;/* Created by AMXPC on 2017/3/31. */
 
 import Util.FileUploader;
 import test.AnalysisResult;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "TestServlet", urlPatterns = {"/test.Test"})
+@WebServlet(name = "TestServlet", urlPatterns = {"/Test"})
 public class TestServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FileUploader fileUploader = new FileUploader(request);
@@ -21,11 +21,13 @@ public class TestServlet extends HttpServlet {
         AnalysisResult analysisResult = null;
         switch (testedName) {
             case "Triangle":
-                TestTriangle testTriangle = new TestTriangle(fileUploader.getUploadFile(), "test.Test" + fileUploader.getFileName(), tester);
+                TestTriangle testTriangle = new TestTriangle(fileUploader.getUploadFile(),
+                        fileUploader.getFilePath() +"\\Test" + fileUploader.getFileName(), tester);
                 analysisResult = testTriangle.doTest();
                 break;
             case "Date":
-                TestDate testDate = new TestDate(fileUploader.getUploadFile(), "test.Test" + fileUploader.getFileName(), tester);
+                TestDate testDate = new TestDate(fileUploader.getUploadFile(),
+                        fileUploader.getFilePath() +"\\Test" + fileUploader.getFileName(), tester);
                 analysisResult = testDate.doTest();
                 break;
             case "Salary":

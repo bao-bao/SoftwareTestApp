@@ -7,12 +7,12 @@ import java.util.ArrayList;
 
 public class TestDate extends Test {
 
-    public TestDate(File testDataFile, String testResultFile, String tester) {
-        super(testDataFile, testResultFile, tester);
+    public TestDate(File testDataFile, String testResultFilePath, String tester) {
+        super(testDataFile, testResultFilePath, tester);
     }
 
     public AnalysisResult doTest() {
-        Executor executor = new Executor(testDataFile, testResultFile, "Date");
+        Executor executor = new Executor(testDataFile, testResultFilePath, "Date");
         AnalysisResult analysisResult = null;
         try {
             ArrayList<Object> result = executor.execute(this, TestDate.class.getMethod("invoke", Object.class), 1);

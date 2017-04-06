@@ -7,12 +7,12 @@ import java.util.ArrayList;
 
 public class TestTriangle extends Test {
 
-    public TestTriangle(File testDataFile, String testResultFile, String tester) {
-        super(testDataFile, testResultFile, tester);
+    public TestTriangle(File testDataFile, String testResultFilePath, String tester) {
+        super(testDataFile, testResultFilePath, tester);
     }
 
     public AnalysisResult doTest() {
-        Executor executor = new Executor(testDataFile, testResultFile, "Triangle");
+        Executor executor = new Executor(testDataFile, testResultFilePath, "Triangle");
         AnalysisResult analysisResult = null;
         try {
             ArrayList<Object> result = executor.execute(this, TestTriangle.class.getMethod("invoke", Object.class), 3);

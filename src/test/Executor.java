@@ -19,11 +19,11 @@ import java.util.Objects;
 class Executor {
     private File dataFile = null;
     private String sheet = null;
-    private String targetFile = null;
+    private String targetFilePath = null;
 
-    Executor(File dataFile, String targetFile, String sheet) {
+    Executor(File dataFile, String targetFilePath, String sheet) {
         this.dataFile = dataFile;
-        this.targetFile = targetFile;
+        this.targetFilePath = targetFilePath;
         this.sheet = sheet;
     }
 
@@ -73,7 +73,7 @@ class Executor {
              * 方法二：将WritableWorkbook直接写入到输出流 WritableWorkbook wwb = Workbook.createWorkbook(outputStream);   */
             //创建Excel工作表 指定名称和位置
             data = Workbook.getWorkbook(new FileInputStream(dataFile));
-            workbook = Workbook.createWorkbook(new File(dataFile.getPath() + targetFile), data);
+            workbook = Workbook.createWorkbook(new File(targetFilePath), data);
             WritableSheet wSheet = workbook.getSheet(sheet);
             double rightNum = 0.0;
 
