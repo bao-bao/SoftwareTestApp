@@ -1,4 +1,4 @@
-/* Created by AMXPC on 2017/3/15. */
+package source;/* Created by AMXPC on 2017/3/15. */
 
 public class JudgeTriangle {
     public static String judgeTriangle(double a, double b, double c) {
@@ -6,7 +6,7 @@ public class JudgeTriangle {
             return "Error: Less than 0";
         }
 
-        if((a + b) <= c && (b + c) <= a && (c + a) <= b) {
+        if((a + b) >= c || (b + c) >= a || (c + a) >= b) {
             return "Error: Can't be triangle";
         }
 

@@ -1,10 +1,13 @@
-/* Created by AMXPC on 2017/3/15. */
+package test;/* Created by AMXPC on 2017/3/15. */
 
+import source.NextDate;
+
+import java.io.File;
 import java.util.ArrayList;
 
 public class TestDate extends Test {
 
-    public TestDate(String testDataFile, String testResultFile, String tester) {
+    public TestDate(File testDataFile, String testResultFile, String tester) {
         super(testDataFile, testResultFile, tester);
     }
 

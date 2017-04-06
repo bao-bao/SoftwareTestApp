@@ -1,4 +1,4 @@
-/* Created by AMXPC on 2017/3/15. */
+package test;/* Created by AMXPC on 2017/3/15. */
 
 import jxl.Cell;
 import jxl.Sheet;
@@ -17,11 +17,11 @@ import java.util.Date;
 import java.util.Objects;
 
 class Executor {
-    private String dataFile = null;
+    private File dataFile = null;
     private String sheet = null;
     private String targetFile = null;
 
-    Executor(String dataFile, String targetFile, String sheet) {
+    Executor(File dataFile, String targetFile, String sheet) {
         this.dataFile = dataFile;
         this.targetFile = targetFile;
         this.sheet = sheet;
@@ -73,7 +73,7 @@ class Executor {
              * 方法二：将WritableWorkbook直接写入到输出流 WritableWorkbook wwb = Workbook.createWorkbook(outputStream);   */
             //创建Excel工作表 指定名称和位置
             data = Workbook.getWorkbook(new FileInputStream(dataFile));
-            workbook = Workbook.createWorkbook(new File(targetFile), data);
+            workbook = Workbook.createWorkbook(new File(dataFile.getPath() + targetFile), data);
             WritableSheet wSheet = workbook.getSheet(sheet);
             double rightNum = 0.0;
 

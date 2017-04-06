@@ -10,6 +10,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.List;
+import java.util.Objects;
 
 public class FileUploader {
     private String filePath;
@@ -52,39 +53,61 @@ public class FileUploader {
                 } else {
                     fileName = clientName;
                 }
-                filePath=request.getSession().getServletContext().getRealPath("upload");
-                System.out.println(filePath);
+                filePath = request.getSession().getServletContext().getRealPath("upload");
 
-                InputStream inputStream2 = null;
-                BufferedOutputStream bos = null;
-                try {
-                    //从Request输入流中读取文件，并写入到服务器
-                    inputStream2 = fileItem.getInputStream();
-                    //在服务器端创建文件
-                    uploadFile = new File(filePath + "/" + fileName);
-                    bos = new BufferedOutputStream(new FileOutputStream(uploadFile));
-
-                    byte[] buffer = new byte[10 * 1024];
-                    int len;
-                    while ((len = inputStream2.read(buffer, 0, 10 * 1024)) != -1) {
-                        bos.write(buffer, 0, len);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } finally {
-                    //关闭资源
+                //读取xls文件，其他文件略过
+                if (fileName.endsWith(".xls")) {
+                    InputStream inputStream2 = null;
+                    BufferedOutputStream bos = null;
                     try {
-                        if (bos != null) {
-                            bos.close();
+                        //从Request输入流中读取文件，并写入到服务器
+                        inputStream2 = fileItem.getInputStream();
+                        //在服务器端创建文件
+                        uploadFile = new File(filePath + "/" + fileName);
+                        if(uploadFile.exists()) {
+                            uploadFile.delete();
+                            uploadFile = new File(filePath + "/" + fileName);
                         }
-                        if (inputStream2 != null) {
-                            inputStream2.close();
+                        if(!uploadFile.getParentFile().exists()) {
+                            //如果目标文件所在的目录不存在，则创建父目录
+                            System.out.println("文件所在目录不存在");
+                        }
+                        if(uploadFile.createNewFile()) {
+                            System.out.println("创建" + clientName + "成功");
+                        }
+                        bos = new BufferedOutputStream(new FileOutputStream(uploadFile));
+
+                        byte[] buffer = new byte[10 * 1024];
+                        int len;
+                        while ((len = inputStream2.read(buffer, 0, 10 * 1024)) != -1) {
+                            bos.write(buffer, 0, len);
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
+                    } finally {
+                        //关闭资源
+                        try {
+                            if (bos != null) {
+                                bos.close();
+                            }
+                            if (inputStream2 != null) {
+                                inputStream2.close();
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
+                    System.out.println("您上传文件" + clientName + "成功");
+                } else {
+                    fileName = "= wrong =";
                 }
-                System.out.println("您上传文件" + clientName + "成功");
+            } else {
+                if(Objects.equals(fileItem.getFieldName(), "project")) {
+                    request.setAttribute("project", fileItem.getString());
+                }
+                if(Objects.equals(fileItem.getFieldName(), "tester")) {
+                    request.setAttribute("tester", fileItem.getString());
+                }
             }
         }
     }

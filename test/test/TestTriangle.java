@@ -1,10 +1,13 @@
-/* Created by AMXPC on 2017/3/15. */
+package test;/* Created by AMXPC on 2017/3/15. */
 
+import source.JudgeTriangle;
+
+import java.io.File;
 import java.util.ArrayList;
 
 public class TestTriangle extends Test {
 
-    public TestTriangle(String testDataFile, String testResultFile, String tester) {
+    public TestTriangle(File testDataFile, String testResultFile, String tester) {
         super(testDataFile, testResultFile, tester);
     }
 
