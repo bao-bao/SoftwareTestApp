@@ -3,7 +3,7 @@
  */
 public class CalculateSalary {
     public static double calculateSalary(int a, int b, int c){
-        if(a<1 || b<1 || c<1){
+        if(a<1 || b<1 || c<1 || a>90 || b>70 || c> 80){
             return 0;
         }
         try {
