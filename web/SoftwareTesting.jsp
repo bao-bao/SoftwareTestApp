@@ -10,8 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <link rel="stylesheet" href="css/app.v2.css" type="text/css"/>
     <link href="http://libs.baidu.com/fontawesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <script src="//cdn.bootcss.com/jquery/3.2.1/core.js"></script>
-    <script src="js/app.v2.js"></script>
 </head>
 <body>
 <section class="vbox">
@@ -36,9 +34,13 @@
                                 <button type="button" class="btn btn-sm btn-primary dropdown-toggle"
                                         data-toggle="dropdown"> Switch Project <span class="caret"></span></button>
                                 <ul id="select" class="dropdown-menu text-left">
-                                    <li><a href="javascript:" onclick="document.getElementById('project').value = 'Triangle';">Triangle</a></li>
-                                    <li><a href="javascript:" onclick="document.getElementById('project').value = 'Date';">Date</a></li>
-                                    <li><a href="javascript:" onclick="document.getElementById('project').value = 'Salary';">Sale</a></li>
+                                    <li><a href="javascript:"
+                                           onclick="document.getElementById('project').value = 'Triangle';">Triangle</a>
+                                    </li>
+                                    <li><a href="javascript:"
+                                           onclick="document.getElementById('project').value = 'Date';">Date</a></li>
+                                    <li><a href="javascript:"
+                                           onclick="document.getElementById('project').value = 'Salary';">Sale</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -54,22 +56,27 @@
                                     </i>
                                     <input class="form-control" type="text" id="project" name="project"
                                            style="width: 90%; margin-left: 5%; margin-right: 5%"
-                                           placeholder="Project name" value="<%= request.getAttribute("project") == null ? "" : (String)request.getAttribute("project") %>"/>
+                                           placeholder="Project name"
+                                           value="<%= request.getAttribute("project") == null ? "" : (String)request.getAttribute("project") %>"/>
 
                                     <i class="fa fa-file-text icon" style="margin-top: 20px; margin-left: 5% ">
                                         <b class="bg-primary"></b>
                                     </i>
-                                    <a href="javascript:" class="a-upload" style="width: 90%; margin-left: 5%; margin-right: 5%" >
-                                        <input type="file" name="file" id="file"/> <div style="font-size: 14px ">Select file </div>
+                                    <a href="javascript:" class="a-upload"
+                                       style="width: 90%; margin-left: 5%; margin-right: 5%">
+                                        <input type="file" name="file" id="file"/>
+                                        <div style="font-size: 14px ">Select file</div>
                                     </a>
                                     <i class="fa fa-columns icon" style="margin-top: 20px; margin-left: 5%">
                                         <b class="bg-warning"></b>
                                     </i>
                                     <input type="text" class="form-control" id="tester" name="tester"
-                                           style="width: 90%; margin-left: 5%; margin-right: 5%" placeholder="Tester" value="<%= request.getAttribute("tester") == null ? "" : (String)request.getAttribute("tester") %>"
+                                           style="width: 90%; margin-left: 5%; margin-right: 5%" placeholder="Tester"
+                                           value="<%= request.getAttribute("tester") == null ? "" : (String)request.getAttribute("tester") %>"
                                            data-required="true"/>
 
-                                    <button type="button" class="btn btn-success btn-s-xs" onclick="document.getElementById('form').submit();"
+                                    <button type="button" class="btn btn-success btn-s-xs"
+                                            onclick="document.getElementById('form').submit();"
                                             style="margin-top: 20px; margin-left: 29%">Submit
                                     </button>
                                 </form>
@@ -90,46 +97,50 @@
                         </div>
 
                         <div class="row">
-                            <% AnalysisResult analysisResult = (AnalysisResult)request.getAttribute("analysisResult"); %>
+                            <% AnalysisResult analysisResult = (AnalysisResult) request.getAttribute("analysisResult"); %>
                             <div class="col-sm-12">
                                 <form data-validate="parsley">
                                     <section class="panel panel-default">
-                                        <header class="panel-heading"><span class="h4">Result test.AnalysisResult</span></header>
+                                        <header class="panel-heading"><span class="h4">Result Analysis</span>
+                                        </header>
                                         <div class="form-group"
                                              style="margin-top: 20px; margin-left: 5%; margin-right: 5%">
                                             <label>Number of Testing Use Case</label>
                                             <input type="text" class="form-control" placeholder="Disabled input here..."
-                                                   disabled value="<%= analysisResult == null ? "" : analysisResult.getTotalUsecase() %>">
+                                                   disabled
+                                                   value="<%= analysisResult == null ? "" : analysisResult.getTotalUsecase() %>">
                                         </div>
                                         <div class="form-group"
                                              style="margin-top: 20px; margin-left: 5%; margin-right: 5%">
                                             <label>Number of Right</label>
                                             <input type="text" class="form-control" placeholder="Disabled input here..."
-                                                   disabled value="<%= analysisResult == null ? "" : analysisResult.getRightNum()%>">
+                                                   disabled
+                                                   value="<%= analysisResult == null ? "" : analysisResult.getRightNum()%>">
                                         </div>
                                         <div class="form-group"
                                              style="margin-top: 20px; margin-left: 5%; margin-right: 5%">
                                             <label>Number of Wrong</label>
                                             <input type="text" class="form-control" placeholder="Disabled input here..."
-                                                   disabled value="<%= analysisResult == null ? "" : analysisResult.getWrongNum()%>">
+                                                   disabled
+                                                   value="<%= analysisResult == null ? "" : analysisResult.getWrongNum()%>">
                                         </div>
                                         <div class="form-group"
                                              style="margin-top: 20px; margin-left: 5%; margin-right: 5%">
                                             <label>Percentage</label>
                                             <input type="text" class="form-control" placeholder="Disabled input here..."
-                                                   disabled value="<%= analysisResult == null ? "" : analysisResult.getPercentage()%>">
+                                                   disabled
+                                                   value="<%= analysisResult == null ? "" : analysisResult.getPercentage()%>">
                                         </div>
                                         <footer class="panel-footer text-right bg-light lter">
-                                            <button type="submit" class="btn btn-success btn-s-xs"
-                                                    style="margin-right: 3.5%">Excel
-                                            </button>
+                                            <a type="button" class="btn btn-success btn-s-xs"
+                                                    style="margin-right: 3.5%" href="Test?filename=<%= (String)request.getAttribute("resultFile") %>">Excel
+                                            </a>
                                         </footer>
 
                                     </section>
                                 </form>
                             </div>
                         </div>
-
 
                     </section>
                 </section>
@@ -138,4 +149,5 @@
     </section>
 </section>
 </body>
+<script src="js/app.v2.js"></script>
 </html>
