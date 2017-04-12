@@ -24,7 +24,7 @@ public class TestSalary extends Test {
         return analysisResult;
     }
 
-    protected Object invoke(Object args) throws Exception {
+    public Object invoke(Object args) throws Exception {
         String[] argdata = (String[]) args;
         int arg1 = Integer.valueOf(argdata[0]);
         int arg2 = Integer.valueOf(argdata[1]);
