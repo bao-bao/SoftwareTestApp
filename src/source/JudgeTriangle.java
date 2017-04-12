@@ -6,7 +6,7 @@ public class JudgeTriangle {
             return "Error: Less than 0";
         }
 
-        if((a + b) >= c || (b + c) >= a || (c + a) >= b) {
+        if((a + b) <= c || (b + c) <= a || (c + a) <= b) {
             return "Error: Can't be triangle";
         }
 
@@ -30,17 +30,17 @@ public class JudgeTriangle {
             angle_relation = 2;
         }
 
-//        if(a == b || a == c || b == c) {
-//            if(a == b && b == c) {
-//                side_relation = 5;
-//            }
-//            else {
-//                side_relation = 4;
-//            }
-//        }
-//        else {
-//            side_relation = 3;
-//        }
+        if(a == b || a == c || b == c) {
+            if(a == b && b == c) {
+                side_relation = 5;
+            }
+            else {
+                side_relation = 4;
+            }
+        }
+        else {
+            side_relation = 3;
+        }
 
 //        switch (angle_relation * side_relation) {
 //            case 3: return "锐角三角形";
@@ -54,10 +54,18 @@ public class JudgeTriangle {
 //                return "Error: Can't recognize";
 //        }
 
-        switch (angle_relation) {
-            case 1: return "锐角三角形";
-            case 2: return "直角三角形";
-            case 3: return "钝角三角形";
+//        switch (angle_relation) {
+//            case 1: return "锐角三角形";
+//            case 2: return "直角三角形";
+//            case 3: return "钝角三角形";
+//            default:
+//                return "Error: Can't recognize";
+//        }
+
+        switch (side_relation) {
+            case 5: return "等边三角形";
+            case 4: return "等腰三角形";
+            case 3: return "一般三角形";
             default:
                 return "Error: Can't recognize";
         }
