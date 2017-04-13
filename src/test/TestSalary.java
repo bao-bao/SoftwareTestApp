@@ -16,8 +16,8 @@ public class TestSalary extends Test {
         Executor executor = new Executor(testDataFile, testResultFilePath, "Salary");
         AnalysisResult analysisResult = null;
         try {
-            ArrayList<Object> result = executor.execute(this, TestSalary.class.getMethod("invoke", Object.class), 3);
-            analysisResult = executor.write(result, 4, tester);
+            ArrayList<Object> result = executor.execute(this, TestSalary.class.getMethod("invoke", Object.class), 4);
+            analysisResult = executor.write(result, 5, tester);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }

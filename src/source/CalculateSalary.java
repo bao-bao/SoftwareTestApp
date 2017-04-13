@@ -9,7 +9,7 @@ public class CalculateSalary {
         if (a < 1 || b < 1 || c < 1 || a > 90 || b > 70 || c > 80) {
             return 0;
         }
-        sales = 25 * a + 30 * b + 45 * c;
+        sales = 25 * a + 45 * b + 30 * c;
         if (sales < 1000)
             return sales * 0.05;
         else if (sales < 1800)

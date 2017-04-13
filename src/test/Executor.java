@@ -1,6 +1,7 @@
 package test;/* Created by AMXPC on 2017/3/15. */
 
 import jxl.Cell;
+import jxl.CellType;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.write.*;
@@ -38,6 +39,7 @@ class Executor {
             //Sheet的下标是从0开始
             //获取第一张Sheet表
             Sheet readsheet = workbook.getSheet(sheet);
+            System.out.println(readsheet.getRows());
             //获取指定单元格的对象引用
             for (int row = 1; row <= readsheet.getRows(); row++) {
                 String[] args = new String[argNum];
@@ -132,7 +134,17 @@ class Executor {
 
                 //7.判断是否正确
                 Cell expected = wSheet.getCell(resultColumn + 1, row + 1);
-                if (Objects.equals(expected.getContents(), result.get(row).toString())) {
+
+                boolean same = false;
+                System.out.println(expected.getType());
+                if (expected.getType() == CellType.NUMBER || expected.getType() == CellType.NUMBER_FORMULA) {
+                    if (Double.valueOf(expected.getContents()) == (double) (result.get(row))) {
+                        same = true;
+                    }
+                } else if (Objects.equals(expected.getContents(), result.get(row).toString())) {
+                    same = true;
+                }
+                if (same) {
                     rightNum++;
                     Boolean compare = new Boolean(resultColumn + 2, row + 1, true);
                     wSheet.addCell(compare);
