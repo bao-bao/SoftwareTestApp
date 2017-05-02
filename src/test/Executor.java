@@ -136,7 +136,6 @@ class Executor {
                 Cell expected = wSheet.getCell(resultColumn + 1, row + 1);
 
                 boolean same = false;
-                System.out.println(expected.getType());
                 if (expected.getType() == CellType.NUMBER || expected.getType() == CellType.NUMBER_FORMULA) {
                     if (Double.valueOf(expected.getContents()) == (double) (result.get(row))) {
                         same = true;

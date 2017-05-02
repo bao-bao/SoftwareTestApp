@@ -1,10 +1,7 @@
 package servlet;/* Created by AMXPC on 2017/3/31. */
 
 import Util.FileUploader;
-import test.AnalysisResult;
-import test.TestDate;
-import test.TestSalary;
-import test.TestTriangle;
+import test.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,6 +33,10 @@ public class TestServlet extends HttpServlet {
             case "Salary":
                 TestSalary testSalary = new TestSalary(fileUploader.getUploadFile(), resultFilePath, tester);
                 analysisResult = testSalary.doTest();
+                break;
+            case "Mobile":
+                TestPhone testPhone = new TestPhone(fileUploader.getUploadFile(), resultFilePath, tester);
+                analysisResult = testPhone.doTest();
                 break;
             default:
                 // TODO: more test source here

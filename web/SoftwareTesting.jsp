@@ -41,6 +41,8 @@
                                            onclick="document.getElementById('project').value = 'Date';">Date</a></li>
                                     <li><a href="javascript:"
                                            onclick="document.getElementById('project').value = 'Salary';">Sale</a></li>
+                                    <li><a href="javascript:"
+                                           onclick="document.getElementById('project').value = 'Mobile';">Mobile</a></li>
                                 </ul>
                             </div>
                         </div>
