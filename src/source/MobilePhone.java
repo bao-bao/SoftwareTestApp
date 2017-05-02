@@ -9,7 +9,7 @@ public class MobilePhone {
         double total;
         int basic = 25;
         double perMinute = 0.15;
-        if(minute < 0 || overdue < 0) {
+        if(minute < 0 || overdue < 0 || minute > 44640 || overdue > 11) {
             return -1;
         }
         else if(minute <= 60 && overdue <= 1) {
