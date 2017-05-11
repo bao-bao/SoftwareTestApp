@@ -1,8 +1,7 @@
 package source;
 
-/**
- * Created by liuzhili on 2017/4/4.
- */
+/* Created by liuzhili on 2017/4/4. */
+
 public class CalculateSalary {
     public static double calculateSalary(int a, int b, int c) {
         double sales;
