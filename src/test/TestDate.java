@@ -11,7 +11,7 @@ public class TestDate extends Test {
         super(testDataFile, testResultFilePath, tester);
     }
 
-    public AnalysisResult doTest() {
+    public AnalysisResult doBatchTest() {
         Executor executor = new Executor(testDataFile, testResultFilePath, "Date");
         AnalysisResult analysisResult = null;
         try {
@@ -23,7 +23,7 @@ public class TestDate extends Test {
         return analysisResult;
     }
 
-    public String invoke(Object args) throws Exception {
+    public Object invoke(Object args) throws Exception {
         String[] argdata = (String[]) args;
         String arg1 = argdata[0];
         return NextDate.getNextDate(arg1);

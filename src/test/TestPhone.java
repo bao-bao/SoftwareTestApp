@@ -13,7 +13,7 @@ public class TestPhone extends Test {
         super(testDataFile, testResultFilePath, tester);
     }
 
-    public AnalysisResult doTest() {
+    public AnalysisResult doBatchTest() {
         Executor executor = new Executor(testDataFile, testResultFilePath, "MobilePhone");
         AnalysisResult analysisResult = null;
         try {

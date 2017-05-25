@@ -11,7 +11,7 @@ public class TestTriangle extends Test {
         super(testDataFile, testResultFilePath, tester);
     }
 
-    public AnalysisResult doTest() {
+    public AnalysisResult doBatchTest() {
         Executor executor = new Executor(testDataFile, testResultFilePath, "Triangle");
         AnalysisResult analysisResult = null;
         try {

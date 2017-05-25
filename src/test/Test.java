@@ -13,6 +13,17 @@ abstract class Test {
         this.tester = tester;
     }
 
-    abstract AnalysisResult doTest();
+    abstract AnalysisResult doBatchTest();
+
+    public Object doSingleTest(String[] parameters) {
+        Object result;
+        try {
+            result = this.invoke(parameters);
+        } catch (Exception e) {
+            return "Error: Wrong arguments format";
+        }
+        return result;
+    }
+
     abstract protected Object invoke(Object args) throws Exception;
 }

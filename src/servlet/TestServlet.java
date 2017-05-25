@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,27 +18,63 @@ import java.io.OutputStream;
 @WebServlet(name = "TestServlet", urlPatterns = {"/Test"})
 public class TestServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        FileUploader fileUploader = new FileUploader(request);
-        String resultFilePath = fileUploader.getFilePath() +"\\Test" + fileUploader.getFileName();
-        String testedName = (String)request.getAttribute("project");
-        String tester = (String)request.getAttribute("tester");
+        // parameters for single test
+        String testInput = request.getParameter("testInput");
+        String[] singleTestParameters = null;
+        boolean isSingleTest = false;
+        String singleResult = null;
+        // parameters for batch test
+        FileUploader fileUploader = null;
+        String resultFilePath = null;
         AnalysisResult analysisResult = null;
+
+        if(request.getParameter("testInput") != null) {
+            singleTestParameters = testInput.split(",");
+            isSingleTest = true;
+        }
+        else {
+            fileUploader = new FileUploader(request);
+            resultFilePath = fileUploader.getFilePath() + "\\Test" + fileUploader.getFileName();;
+        }
+        // test which module
+        String testedName = request.getAttribute("project") == null ? request.getParameter("project_") : (String) request.getAttribute("project");
+        String tester = (String) request.getAttribute("tester");
+        HttpSession session = request.getSession(true);
+        session.setAttribute("project", testedName);
+        session.setAttribute("sInput", testInput);
+
         switch (testedName) {
             case "Triangle":
-                TestTriangle testTriangle = new TestTriangle(fileUploader.getUploadFile(), resultFilePath, tester);
-                analysisResult = testTriangle.doTest();
+                TestTriangle testTriangle = new TestTriangle(fileUploader != null ? fileUploader.getUploadFile() : null, resultFilePath, tester);
+                if(isSingleTest) {
+                    singleResult = testTriangle.doSingleTest(singleTestParameters).toString();
+                } else {
+                    analysisResult = testTriangle.doBatchTest();
+                }
                 break;
             case "Date":
-                TestDate testDate = new TestDate(fileUploader.getUploadFile(), resultFilePath, tester);
-                analysisResult = testDate.doTest();
+                TestDate testDate = new TestDate(fileUploader != null ? fileUploader.getUploadFile() : null, resultFilePath, tester);
+                if(isSingleTest) {
+                    singleResult = testDate.doSingleTest(singleTestParameters).toString();
+                } else {
+                    analysisResult = testDate.doBatchTest();
+                }
                 break;
             case "Salary":
-                TestSalary testSalary = new TestSalary(fileUploader.getUploadFile(), resultFilePath, tester);
-                analysisResult = testSalary.doTest();
+                TestSalary testSalary = new TestSalary(fileUploader != null ? fileUploader.getUploadFile() : null, resultFilePath, tester);
+                if(isSingleTest) {
+                    singleResult = testSalary.doSingleTest(singleTestParameters).toString();
+                } else {
+                    analysisResult = testSalary.doBatchTest();
+                }
                 break;
             case "Mobile":
-                TestPhone testPhone = new TestPhone(fileUploader.getUploadFile(), resultFilePath, tester);
-                analysisResult = testPhone.doTest();
+                TestPhone testPhone = new TestPhone(fileUploader != null ? fileUploader.getUploadFile() : null, resultFilePath, tester);
+                if(isSingleTest) {
+                    singleResult = testPhone.doSingleTest(singleTestParameters).toString();
+                } else {
+                    analysisResult = testPhone.doBatchTest();
+                }
                 break;
             default:
                 // TODO: more test source here
@@ -46,6 +84,9 @@ public class TestServlet extends HttpServlet {
             analysisResult.setAttribute(request);
             String resultFileName = "Test" + fileUploader.getFileName();
             request.setAttribute("resultFile", resultFileName);
+        }
+        else {
+            request.setAttribute("singleResult", singleResult);
         }
         doGet(request, response);
     }

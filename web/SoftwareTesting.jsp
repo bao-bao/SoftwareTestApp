@@ -37,14 +37,14 @@
                                         data-toggle="dropdown"> Switch Project <span class="caret"></span></button>
                                 <ul id="select" class="dropdown-menu text-left">
                                     <li><a href="javascript:"
-                                           onclick="document.getElementById('project').value = 'Triangle';">Triangle</a>
+                                           onclick="document.getElementById('project').value = 'Triangle';document.getElementById('project_').value = 'Triangle';">Triangle</a>
                                     </li>
                                     <li><a href="javascript:"
-                                           onclick="document.getElementById('project').value = 'Date';">Date</a></li>
+                                           onclick="document.getElementById('project').value = 'Date';document.getElementById('project_').value = 'Date';">Date</a></li>
                                     <li><a href="javascript:"
-                                           onclick="document.getElementById('project').value = 'Salary';">Sale</a></li>
+                                           onclick="document.getElementById('project').value = 'Salary';document.getElementById('project_').value = 'Salary';">Sale</a></li>
                                     <li><a href="javascript:"
-                                           onclick="document.getElementById('project').value = 'Mobile';">Mobile</a></li>
+                                           onclick="document.getElementById('project').value = 'Mobile';document.getElementById('project_').value = 'Mobile';">Mobile</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                                     <input class="form-control" type="text" id="project" name="project"
                                            style="width: 90%; margin-left: 5%; margin-right: 5%"
                                            placeholder="Project name"
-                                           value="<%= request.getAttribute("project") == null ? "" : (String)request.getAttribute("project") %>"/>
+                                           value="<%= request.getSession().getAttribute("project") == null ? "" : request.getSession().getAttribute("project") %>"/>
 
                                     <i class="fa fa-file-text icon" style="margin-top: 20px; margin-left: 5% ">
                                         <b class="bg-primary"></b>
@@ -103,6 +103,11 @@
                         <div class="row">
                             <% AnalysisResult analysisResult = (AnalysisResult) request.getAttribute("analysisResult"); %>
                             <div class="col-sm-12">
+                                <% if(analysisResult == null) { %>
+                                <div class="form-group" style="width: 600px;height:170px;margin: auto;">
+                                    <label style="margin-left: 200px;margin-top: 75px">No batch test data here</label>
+                                </div>
+                                <% } else { %>
                                 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
                                 <div id="main" class="containerEchart" style="width: 600px;height:400px;margin: auto;"></div>
                                 <script type="text/javascript">
@@ -131,8 +136,8 @@
                                                 radius : '55%',
                                                 center: ['50%', '60%'],
                                                 data:[
-                                                    {value:335, name:'True'},
-                                                    {value:310, name:'False'},
+                                                    {value:<%= analysisResult.getRightNum() %>, name:'True'},
+                                                    {value:<%= analysisResult.getWrongNum() %>, name:'False'}
                                                 ],
                                                 itemStyle: {
                                                     emphasis: {
@@ -144,13 +149,14 @@
                                             }
                                         ],
                                         color : [
-                                            'rgb(37,49,62)','rgb(137,204,151)'
+                                            'rgb(137,204,151)', 'rgb(37,49,62)'
                                         ]
                                     };
 
                                     // 使用刚指定的配置项和数据显示图表。
                                     myChart.setOption(option);
                                 </script>
+                                <% } %>
                                 <form data-validate="parsley">
                                     <section class="panel panel-default">
                                         <header class="panel-heading"><span class="h4">Batch of testing use cases</span>
@@ -163,29 +169,33 @@
 
                                     </section>
                                 </form>
-                                <form data-validate="parsley">
+                            </div>
+                            <div class="col-sm-12">
+                                <% String result = (String) request.getAttribute("singleResult"); %>
+                                <form data-validate="parsley" id="sform" method="post">
                                     <section class="panel panel-default">
                                         <header class="panel-heading"><span class="h4">Single testing use case</span>
                                         </header>
                                         <div class="form-group"
                                              style="margin-top: 20px; margin-left: 5%; margin-right: 5%">
                                             <label>Input</label>
-                                            <input type="text" class="form-control" placeholder="Disabled input here..."
-                                                   disabled
-                                                   value="<%= analysisResult == null ? "" : analysisResult.getTotalUsecase() %>">
+                                                <input type="text" class="form-control" id="testInput" name="testInput"
+                                                value="<%= request.getSession().getAttribute("sInput") == null ? "" : request.getSession().getAttribute("sInput") %>">
                                         </div>
                                         <div class="form-group"
                                              style="margin-top: 20px; margin-left: 5%; margin-right: 5%">
                                             <label>Result</label>
                                             <input type="text" class="form-control" placeholder="Disabled input here..."
-                                                   disabled
-                                                   value="<%= analysisResult == null ? "" : analysisResult.getRightNum()%>">
+                                                   disabled="disabled"
+                                                   value="<%= result == null ? "" : result %>">
                                         </div>
+                                        <input hidden="hidden" id="project_" name="project_" value="<%= request.getSession().getAttribute("project") == null ? "" : request.getSession().getAttribute("project") %>">
 
                                         <footer class="panel-footer text-right bg-light lter">
-                                            <a type="button" class="btn btn-success btn-s-xs"
-                                               style="margin-right: 3.5%" href="Test?filename=<%= (String)request.getAttribute("resultFile") %>">Testing begin
-                                            </a>
+                                            <button type="button" class="btn btn-success btn-s-xs"
+                                               style="margin-right: 3.5%"
+                                               onclick="document.getElementById('sform').submit();">Testing begin
+                                            </button>
                                         </footer>
 
                                     </section>
