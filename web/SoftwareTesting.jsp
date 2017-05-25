@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <link rel="stylesheet" href="css/app.v2.css" type="text/css"/>
     <link href="http://libs.baidu.com/fontawesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <script src="js/echarts.js"></script>
 </head>
 <body>
 <section class="vbox">
@@ -23,7 +24,8 @@
         </ul>
     </header>
     <section>
-        <section class="hbox stretch"> <!-- .aside -->
+        <section class="hbox stretch">
+            <!-- .aside -->
             <aside class="bg-light lter b-r aside-md hidden-print" id="nav">
                 <section class="vbox">
                     <header class="header bg-primary lter text-center clearfix">
@@ -101,41 +103,88 @@
                         <div class="row">
                             <% AnalysisResult analysisResult = (AnalysisResult) request.getAttribute("analysisResult"); %>
                             <div class="col-sm-12">
+                                <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                                <div id="main" class="containerEchart" style="width: 600px;height:400px;margin: auto;"></div>
+                                <script type="text/javascript">
+                                    // 基于准备好的dom，初始化echarts实例
+                                    var myChart = echarts.init(document.getElementById('main'));
+
+                                    // 指定图表的配置项和数据
+                                    option = {
+                                        title : {
+                                            text: 'Result Analysis',
+                                            x:'center'
+                                        },
+                                        tooltip : {
+                                            trigger: 'item',
+                                            formatter: "{a} <br/>{b} : {c} ({d}%)"
+                                        },
+                                        legend: {
+                                            orient: 'vertical',
+                                            left: 'left',
+                                            data: ['True','False']
+                                        },
+                                        series : [
+                                            {
+                                                name: 'Percentage',
+                                                type: 'pie',
+                                                radius : '55%',
+                                                center: ['50%', '60%'],
+                                                data:[
+                                                    {value:335, name:'True'},
+                                                    {value:310, name:'False'},
+                                                ],
+                                                itemStyle: {
+                                                    emphasis: {
+                                                        shadowBlur: 10,
+                                                        shadowOffsetX: 0,
+                                                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        color : [
+                                            'rgb(37,49,62)','rgb(137,204,151)'
+                                        ]
+                                    };
+
+                                    // 使用刚指定的配置项和数据显示图表。
+                                    myChart.setOption(option);
+                                </script>
                                 <form data-validate="parsley">
                                     <section class="panel panel-default">
-                                        <header class="panel-heading"><span class="h4">Result Analysis</span>
+                                        <header class="panel-heading"><span class="h4">Batch of testing use cases</span>
+                                        </header>
+                                        <footer class="panel-footer text-right bg-light lter">
+                                            <a type="button" class="btn btn-success btn-s-xs"
+                                                    style="margin-right: 3.5%" href="Test?filename=<%= (String)request.getAttribute("resultFile") %>">Excel
+                                            </a>
+                                        </footer>
+
+                                    </section>
+                                </form>
+                                <form data-validate="parsley">
+                                    <section class="panel panel-default">
+                                        <header class="panel-heading"><span class="h4">Single testing use case</span>
                                         </header>
                                         <div class="form-group"
                                              style="margin-top: 20px; margin-left: 5%; margin-right: 5%">
-                                            <label>Number of Testing Use Case</label>
+                                            <label>Input</label>
                                             <input type="text" class="form-control" placeholder="Disabled input here..."
                                                    disabled
                                                    value="<%= analysisResult == null ? "" : analysisResult.getTotalUsecase() %>">
                                         </div>
                                         <div class="form-group"
                                              style="margin-top: 20px; margin-left: 5%; margin-right: 5%">
-                                            <label>Number of Right</label>
+                                            <label>Result</label>
                                             <input type="text" class="form-control" placeholder="Disabled input here..."
                                                    disabled
                                                    value="<%= analysisResult == null ? "" : analysisResult.getRightNum()%>">
                                         </div>
-                                        <div class="form-group"
-                                             style="margin-top: 20px; margin-left: 5%; margin-right: 5%">
-                                            <label>Number of Wrong</label>
-                                            <input type="text" class="form-control" placeholder="Disabled input here..."
-                                                   disabled
-                                                   value="<%= analysisResult == null ? "" : analysisResult.getWrongNum()%>">
-                                        </div>
-                                        <div class="form-group"
-                                             style="margin-top: 20px; margin-left: 5%; margin-right: 5%">
-                                            <label>Percentage</label>
-                                            <input type="text" class="form-control" placeholder="Disabled input here..."
-                                                   disabled
-                                                   value="<%= analysisResult == null ? "" : analysisResult.getPercentage()%>">
-                                        </div>
+
                                         <footer class="panel-footer text-right bg-light lter">
                                             <a type="button" class="btn btn-success btn-s-xs"
-                                                    style="margin-right: 3.5%" href="Test?filename=<%= (String)request.getAttribute("resultFile") %>">Excel
+                                               style="margin-right: 3.5%" href="Test?filename=<%= (String)request.getAttribute("resultFile") %>">Testing begin
                                             </a>
                                         </footer>
 
