@@ -40,11 +40,17 @@
                                            onclick="document.getElementById('project').value = 'Triangle';document.getElementById('project_').value = 'Triangle';">Triangle</a>
                                     </li>
                                     <li><a href="javascript:"
-                                           onclick="document.getElementById('project').value = 'Date';document.getElementById('project_').value = 'Date';">Date</a></li>
+                                           onclick="document.getElementById('project').value = 'Date';document.getElementById('project_').value = 'Date';">Date</a>
+                                    </li>
                                     <li><a href="javascript:"
-                                           onclick="document.getElementById('project').value = 'Salary';document.getElementById('project_').value = 'Salary';">Sale</a></li>
+                                           onclick="document.getElementById('project').value = 'Salary';document.getElementById('project_').value = 'Salary';">Sale</a>
+                                    </li>
                                     <li><a href="javascript:"
-                                           onclick="document.getElementById('project').value = 'Mobile';document.getElementById('project_').value = 'Mobile';">Mobile</a></li>
+                                           onclick="document.getElementById('project').value = 'Mobile';document.getElementById('project_').value = 'Mobile';">Mobile</a>
+                                    </li>
+                                    <li><a href="javascript:"
+                                           onclick="document.getElementById('project').value = 'Seller';document.getElementById('project_').value = 'Seller';">Seller</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -103,41 +109,42 @@
                         <div class="row">
                             <% AnalysisResult analysisResult = (AnalysisResult) request.getAttribute("analysisResult"); %>
                             <div class="col-sm-12">
-                                <% if(analysisResult == null) { %>
+                                <% if (analysisResult == null) { %>
                                 <div class="form-group" style="width: 600px;height:170px;margin: auto;">
                                     <label style="margin-left: 200px;margin-top: 75px">No batch test data here</label>
                                 </div>
                                 <% } else { %>
                                 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-                                <div id="main" class="containerEchart" style="width: 600px;height:400px;margin: auto;"></div>
+                                <div id="main" class="containerEchart"
+                                     style="width: 600px;height:400px;margin: auto;"></div>
                                 <script type="text/javascript">
                                     // 基于准备好的dom，初始化echarts实例
                                     var myChart = echarts.init(document.getElementById('main'));
 
                                     // 指定图表的配置项和数据
                                     option = {
-                                        title : {
+                                        title: {
                                             text: 'Result Analysis',
-                                            x:'center'
+                                            x: 'center'
                                         },
-                                        tooltip : {
+                                        tooltip: {
                                             trigger: 'item',
                                             formatter: "{a} <br/>{b} : {c} ({d}%)"
                                         },
                                         legend: {
                                             orient: 'vertical',
                                             left: 'left',
-                                            data: ['True','False']
+                                            data: ['True', 'False']
                                         },
-                                        series : [
+                                        series: [
                                             {
                                                 name: 'Percentage',
                                                 type: 'pie',
-                                                radius : '55%',
+                                                radius: '55%',
                                                 center: ['50%', '60%'],
-                                                data:[
-                                                    {value:<%= analysisResult.getRightNum() %>, name:'True'},
-                                                    {value:<%= analysisResult.getWrongNum() %>, name:'False'}
+                                                data: [
+                                                    {value:<%= analysisResult.getRightNum() %>, name: 'True'},
+                                                    {value:<%= analysisResult.getWrongNum() %>, name: 'False'}
                                                 ],
                                                 itemStyle: {
                                                     emphasis: {
@@ -148,7 +155,7 @@
                                                 }
                                             }
                                         ],
-                                        color : [
+                                        color: [
                                             'rgb(137,204,151)', 'rgb(37,49,62)'
                                         ]
                                     };
@@ -163,7 +170,8 @@
                                         </header>
                                         <footer class="panel-footer text-right bg-light lter">
                                             <a type="button" class="btn btn-success btn-s-xs"
-                                                    style="margin-right: 3.5%" href="Test?filename=<%= (String)request.getAttribute("resultFile") %>">Excel
+                                               style="margin-right: 3.5%"
+                                               href="Test?filename=<%= (String)request.getAttribute("resultFile") %>">Excel
                                             </a>
                                         </footer>
 
@@ -179,8 +187,8 @@
                                         <div class="form-group"
                                              style="margin-top: 20px; margin-left: 5%; margin-right: 5%">
                                             <label>Input</label>
-                                                <input type="text" class="form-control" id="testInput" name="testInput"
-                                                value="<%= request.getSession().getAttribute("sInput") == null ? "" : request.getSession().getAttribute("sInput") %>">
+                                            <input type="text" class="form-control" id="testInput" name="testInput"
+                                                   value="<%= request.getSession().getAttribute("sInput") == null ? "" : request.getSession().getAttribute("sInput") %>">
                                         </div>
                                         <div class="form-group"
                                              style="margin-top: 20px; margin-left: 5%; margin-right: 5%">
@@ -189,12 +197,13 @@
                                                    disabled="disabled"
                                                    value="<%= result == null ? "" : result %>">
                                         </div>
-                                        <input hidden="hidden" id="project_" name="project_" value="<%= request.getSession().getAttribute("project") == null ? "" : request.getSession().getAttribute("project") %>">
+                                        <input hidden="hidden" id="project_" name="project_"
+                                               value="<%= request.getSession().getAttribute("project") == null ? "" : request.getSession().getAttribute("project") %>">
 
                                         <footer class="panel-footer text-right bg-light lter">
                                             <button type="button" class="btn btn-success btn-s-xs"
-                                               style="margin-right: 3.5%"
-                                               onclick="document.getElementById('sform').submit();">Testing begin
+                                                    style="margin-right: 3.5%"
+                                                    onclick="document.getElementById('sform').submit();">Testing begin
                                             </button>
                                         </footer>
 

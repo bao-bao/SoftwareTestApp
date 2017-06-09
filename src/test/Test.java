@@ -13,7 +13,7 @@ abstract class Test {
         this.tester = tester;
     }
 
-    abstract AnalysisResult doBatchTest();
+    abstract public AnalysisResult doBatchTest();
 
     public Object doSingleTest(String[] parameters) {
         Object result;

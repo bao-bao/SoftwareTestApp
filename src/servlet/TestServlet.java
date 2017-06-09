@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -74,6 +73,14 @@ public class TestServlet extends HttpServlet {
                     singleResult = testPhone.doSingleTest(singleTestParameters).toString();
                 } else {
                     analysisResult = testPhone.doBatchTest();
+                }
+                break;
+            case "Seller":
+                TestSeller testSeller = new TestSeller(fileUploader != null ? fileUploader.getUploadFile() : null, resultFilePath, tester);
+                if(isSingleTest) {
+                    singleResult = testSeller.doSingleTest(singleTestParameters).toString();
+                } else {
+                    analysisResult = testSeller.doBatchTest();
                 }
                 break;
             default:
